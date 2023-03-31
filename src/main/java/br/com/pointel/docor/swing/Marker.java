@@ -4,7 +4,6 @@
  */
 package br.com.pointel.docor.swing;
 
-import br.com.pointel.docor.Kindred;
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -16,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -24,6 +24,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import br.com.pointel.docor.Kindred;
 
 public class Marker extends javax.swing.JFrame {
 
@@ -505,7 +507,7 @@ public class Marker extends javax.swing.JFrame {
                     SwingUtilities.invokeLater(() -> {
                         var prior = textMain.getText();
                         if (!prior.isBlank()) {
-                            textMain.setText(prior + "\n" + text);
+                            textMain.setText(prior + "\n\n" + text);
                         } else {
                             textMain.setText(text);
                         }
