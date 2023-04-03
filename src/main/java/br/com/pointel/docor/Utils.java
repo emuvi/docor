@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.text.Normalizer;
 import java.util.Objects;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class Utils {
 
@@ -13,11 +15,13 @@ public class Utils {
         var origin = path.getAbsolutePath();
         var destiny = new File(origin + ".pdf");
         if (destiny.exists()) {
-            throw new Exception("Error: the converted file already exists.");
+            return null;
         }
         var parent = origin.substring(0, origin.lastIndexOf(File.separator));
-        var name = path.getName().substring(0, path.getName().lastIndexOf('.'));
-        var folder = new File(parent, "temp " + name);
+        var folder = new File(parent, "_docor_temp_" + RandomStringUtils.randomAlphabetic(8));
+        if (folder.exists()) {
+            FileUtils.deleteDirectory(folder);
+        }
         Files.createDirectories(folder.toPath());
         var args = new String[]{"soffice.exe", "--headless", "--convert-to", "pdf", "--outdir", folder.getAbsolutePath(), origin};
         var proc = Runtime.getRuntime().exec(args);
@@ -29,10 +33,11 @@ public class Utils {
         if (proc.exitValue() != 0) {
             throw new Exception("Error: could not convert the file.");
         }
+        var name = path.getName().substring(0, path.getName().lastIndexOf('.'));
         var done = name + ".pdf";
         var converted = new File(folder, done);
         Files.move(converted.toPath(), destiny.toPath());
-        folder.delete();
+        FileUtils.deleteDirectory(folder);
         return destiny;
     }
 
@@ -42,7 +47,7 @@ public class Utils {
         string = string.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
         return string;
     }
-    
+
     public static boolean isMatch(String s1, String s2) {
         return similarity(s1, s2) > 0.84;
     }

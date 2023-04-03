@@ -244,6 +244,9 @@ public class Interface extends javax.swing.JFrame {
             }
 
             private void loadDirectory(File directory, DefaultMutableTreeNode parent) throws Exception {
+                if (directory.getName().startsWith("_docor_temp_")) {
+                    return;
+                }
                 var node = new DefaultMutableTreeNode(directory.getName());
                 SwingUtilities.invokeLater(() -> parent.add(node));
                 for (var inside : directory.listFiles()) {
@@ -290,7 +293,13 @@ public class Interface extends javax.swing.JFrame {
                     if (!file.getName().toLowerCase().endsWith(".pdf")) {
                         file = Utils.convertToPDF(file);
                     }
+                    if (file == null) {
+                        return;
+                    }
                     var paced = new LoadPDF(file).load();
+                    if (paced == null) {
+                        return;
+                    }
                     body.add(paced);
                     var node = new DefaultMutableTreeNode(paced);
                     SwingUtilities.invokeLater(() -> parent.add(node));
@@ -323,12 +332,12 @@ public class Interface extends javax.swing.JFrame {
     }
 
     private void logError(Throwable exception) {
+        exception.printStackTrace();
         if (SwingUtilities.isEventDispatchThread()) {
             edtOutput.setText(exception.getMessage());
         } else {
             SwingUtilities.invokeLater(() -> edtOutput.setText(exception.getMessage()));
         }
-
     }
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed

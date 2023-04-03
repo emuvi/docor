@@ -31,7 +31,7 @@ public class LoadPDF {
                 return Float.compare(e1.minY, e2.minY);
             });
             if (stripes.isEmpty()) {
-                throw new Exception("Error: empty document.");
+                return null;
             }
             var paced = new Paced(file.getName());
             var paged = new Paged(paced);

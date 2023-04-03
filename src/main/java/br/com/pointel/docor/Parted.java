@@ -18,7 +18,7 @@ public class Parted {
     
     private String[] indexWords() {
         String[] parts = text.split("\\s+");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < parts.length; i++) {
             parts[i] = Utils.normalize(parts[i]);
         }
         return parts;
