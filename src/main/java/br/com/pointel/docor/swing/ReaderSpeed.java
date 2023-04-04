@@ -1,6 +1,10 @@
 package br.com.pointel.docor.swing;
 
+import java.awt.event.KeyEvent;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
@@ -11,13 +15,21 @@ public class ReaderSpeed extends javax.swing.JFrame {
     private volatile int index = -1;
     private volatile int waitTime = 200;
     
-    public ReaderSpeed(String text) {
+    public ReaderSpeed(JFrame from, String text) {
         initComponents();
+        setLocationRelativeTo(from);
         this.words = text.split("\\s+");
-        spinnerRate.setModel(new SpinnerNumberModel(450, 0, 1000, 10));
+        spinnerRate.setModel(new SpinnerNumberModel(500, 0, 1000, 10));
         sliderWords.setMaximum(words.length -1);
         sliderWords.setValue(0);
         startTimer();
+        getRootPane().registerKeyboardAction((ev) -> {
+            buttonStartActionPerformed(ev);
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_S, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
+        getRootPane().registerKeyboardAction((ev) -> {
+            setVisible(false);
+            dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_X, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
     
     private void nextWord() {

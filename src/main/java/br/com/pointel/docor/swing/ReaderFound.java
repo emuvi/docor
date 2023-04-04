@@ -31,6 +31,8 @@ public class ReaderFound extends javax.swing.JFrame {
         buttonNextMeet = new javax.swing.JButton();
         buttonNextStar = new javax.swing.JButton();
         buttonClose = new javax.swing.JButton();
+        buttonSelectAll = new javax.swing.JButton();
+        buttonSpeedReader = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Reader");
@@ -88,6 +90,24 @@ public class ReaderFound extends javax.swing.JFrame {
             }
         });
 
+        buttonSelectAll.setMnemonic('A');
+        buttonSelectAll.setText("A");
+        buttonSelectAll.setToolTipText("Select All");
+        buttonSelectAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSelectAllActionPerformed(evt);
+            }
+        });
+
+        buttonSpeedReader.setMnemonic('R');
+        buttonSpeedReader.setText("R");
+        buttonSpeedReader.setToolTipText("Speed Reader");
+        buttonSpeedReader.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSpeedReaderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelUpperLayout = new javax.swing.GroupLayout(panelUpper);
         panelUpper.setLayout(panelUpperLayout);
         panelUpperLayout.setHorizontalGroup(
@@ -102,6 +122,10 @@ public class ReaderFound extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonNextStar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonSelectAll)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonSpeedReader)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonClose)
                 .addContainerGap())
         );
@@ -114,7 +138,9 @@ public class ReaderFound extends javax.swing.JFrame {
                     .addComponent(buttonPriorMeet)
                     .addComponent(buttonNextMeet)
                     .addComponent(buttonNextStar)
-                    .addComponent(buttonClose))
+                    .addComponent(buttonClose)
+                    .addComponent(buttonSpeedReader)
+                    .addComponent(buttonSelectAll))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -189,9 +215,23 @@ public class ReaderFound extends javax.swing.JFrame {
             case '[' -> buttonPriorMeetActionPerformed(null);
             case ']' -> buttonNextMeetActionPerformed(null);
             case '}' -> buttonNextStarActionPerformed(null);
+            case 'A', 'a' -> buttonSelectAllActionPerformed(null);
+            case 'R', 'r' -> buttonSpeedReaderActionPerformed(null);
             case 'X', 'x' -> buttonCloseActionPerformed(null);
         }
     }//GEN-LAST:event_textMainKeyPressed
+
+    private void buttonSpeedReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSpeedReaderActionPerformed
+        var selected = textMain.getSelectedText();
+        if (selected == null || selected.isBlank()) {
+            selected = textMain.getText();
+        }
+        new ReaderSpeed(this, selected).setVisible(true);
+    }//GEN-LAST:event_buttonSpeedReaderActionPerformed
+
+    private void buttonSelectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectAllActionPerformed
+        textMain.selectAll();
+    }//GEN-LAST:event_buttonSelectAllActionPerformed
     
     private void find() {
         var selected = found.getStars().get(starIndex).meets().get(meetIndex).part.getText().trim();
@@ -211,6 +251,8 @@ public class ReaderFound extends javax.swing.JFrame {
     private javax.swing.JButton buttonNextStar;
     private javax.swing.JButton buttonPriorMeet;
     private javax.swing.JButton buttonPriorStar;
+    private javax.swing.JButton buttonSelectAll;
+    private javax.swing.JButton buttonSpeedReader;
     private javax.swing.JPanel panelUpper;
     private javax.swing.JScrollPane scrollMain;
     private javax.swing.JTextArea textMain;

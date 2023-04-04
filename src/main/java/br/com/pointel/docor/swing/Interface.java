@@ -70,7 +70,6 @@ public class Interface extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Docor");
-        setPreferredSize(new java.awt.Dimension(700, 600));
 
         btnLoad.setText("Load");
         btnLoad.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +136,11 @@ public class Interface extends javax.swing.JFrame {
         edtStatus.setBorder(null);
 
         btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panLowerLayout = new javax.swing.GroupLayout(panLower);
         panLower.setLayout(panLowerLayout);
@@ -414,6 +418,10 @@ public class Interface extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_treeBodyMouseClicked
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     public static void start(String args[]) {
         try {

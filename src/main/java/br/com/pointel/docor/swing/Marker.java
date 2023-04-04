@@ -75,7 +75,6 @@ public class Marker extends javax.swing.JFrame {
 
         menuTools = new javax.swing.JPopupMenu();
         menuGroupImages = new javax.swing.JMenuItem();
-        menuSpeedReader = new javax.swing.JMenuItem();
         panUpper = new javax.swing.JPanel();
         checkCapture = new javax.swing.JCheckBox();
         btnSaveAs = new javax.swing.JButton();
@@ -94,6 +93,8 @@ public class Marker extends javax.swing.JFrame {
         buttonBold = new javax.swing.JButton();
         buttonListItem = new javax.swing.JButton();
         buttonNumberItem = new javax.swing.JButton();
+        buttonSpeedReader = new javax.swing.JButton();
+        buttonSelectAll = new javax.swing.JButton();
         scrollMain = new javax.swing.JScrollPane();
         textMain = new javax.swing.JTextArea();
         editStatus = new javax.swing.JTextField();
@@ -105,14 +106,6 @@ public class Marker extends javax.swing.JFrame {
             }
         });
         menuTools.add(menuGroupImages);
-
-        menuSpeedReader.setText("Speed Reader");
-        menuSpeedReader.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuSpeedReaderActionPerformed(evt);
-            }
-        });
-        menuTools.add(menuSpeedReader);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Marker");
@@ -232,6 +225,24 @@ public class Marker extends javax.swing.JFrame {
             }
         });
 
+        buttonSpeedReader.setMnemonic('R');
+        buttonSpeedReader.setText("R");
+        buttonSpeedReader.setToolTipText("Speed Reader");
+        buttonSpeedReader.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSpeedReaderActionPerformed(evt);
+            }
+        });
+
+        buttonSelectAll.setMnemonic('A');
+        buttonSelectAll.setText("A");
+        buttonSelectAll.setToolTipText("Select All");
+        buttonSelectAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSelectAllActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panUpperLayout = new javax.swing.GroupLayout(panUpper);
         panUpper.setLayout(panUpperLayout);
         panUpperLayout.setHorizontalGroup(
@@ -271,7 +282,11 @@ public class Marker extends javax.swing.JFrame {
                         .addComponent(buttonListItem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonNumberItem)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+                        .addComponent(buttonSelectAll)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSpeedReader)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTools)))
                 .addContainerGap())
         );
@@ -298,7 +313,9 @@ public class Marker extends javax.swing.JFrame {
                         .addComponent(buttonBold)
                         .addComponent(buttonListItem)
                         .addComponent(buttonNumberItem)
-                        .addComponent(btnTools))
+                        .addComponent(btnTools)
+                        .addComponent(buttonSpeedReader)
+                        .addComponent(buttonSelectAll))
                     .addComponent(checkDefining)))
         );
 
@@ -403,12 +420,6 @@ public class Marker extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuGroupImagesActionPerformed
 
-    private void menuSpeedReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSpeedReaderActionPerformed
-        var speed = new ReaderSpeed(textMain.getText());
-        speed.setLocationRelativeTo(this);
-        speed.setVisible(true);
-    }//GEN-LAST:event_menuSpeedReaderActionPerformed
-
     private void buttonFolderOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFolderOpenActionPerformed
         try {
             Desktop.getDesktop().open(new File(editFolder.getText()));
@@ -448,6 +459,19 @@ public class Marker extends javax.swing.JFrame {
     private void buttonNumberItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNumberItemActionPerformed
 
     }//GEN-LAST:event_buttonNumberItemActionPerformed
+
+    private void buttonSpeedReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSpeedReaderActionPerformed
+        var selected = textMain.getSelectedText();
+        if (selected == null || selected.isBlank()) {
+            selected = textMain.getText();
+        }
+        new ReaderSpeed(this, selected).setVisible(true);
+    }//GEN-LAST:event_buttonSpeedReaderActionPerformed
+
+    private void buttonSelectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectAllActionPerformed
+        textMain.selectAll();
+        textMain.requestFocus();
+    }//GEN-LAST:event_buttonSelectAllActionPerformed
 
     private void startAutoCapture() {
         new Thread() {
@@ -780,6 +804,8 @@ public class Marker extends javax.swing.JFrame {
     private javax.swing.JButton buttonListItem;
     private javax.swing.JButton buttonNumberItem;
     private javax.swing.JButton buttonParagraph;
+    private javax.swing.JButton buttonSelectAll;
+    private javax.swing.JButton buttonSpeedReader;
     private javax.swing.JButton buttonSubtitle;
     private javax.swing.JButton buttonTitle;
     private javax.swing.JCheckBox cbxSave;
@@ -789,7 +815,6 @@ public class Marker extends javax.swing.JFrame {
     private javax.swing.JTextField editStatus;
     private javax.swing.JTextField edtTitle;
     private javax.swing.JMenuItem menuGroupImages;
-    private javax.swing.JMenuItem menuSpeedReader;
     private javax.swing.JPopupMenu menuTools;
     private javax.swing.JPanel panUpper;
     private javax.swing.JScrollPane scrollMain;

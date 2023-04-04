@@ -16,14 +16,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuGroupImagesActionPerformed"/>
           </Events>
         </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="menuSpeedReader">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Speed Reader"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSpeedReaderActionPerformed"/>
-          </Events>
-        </MenuItem>
       </SubComponents>
     </Container>
   </NonVisualComponents>
@@ -117,7 +109,11 @@
                           <Component id="buttonListItem" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonNumberItem" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="280" max="32767" attributes="0"/>
+                          <EmptySpace pref="222" max="32767" attributes="0"/>
+                          <Component id="buttonSelectAll" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="buttonSpeedReader" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnTools" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -150,6 +146,8 @@
                           <Component id="buttonListItem" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonNumberItem" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnTools" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonSpeedReader" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonSelectAll" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="checkDefining" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -294,6 +292,26 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNumberItemActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="buttonSpeedReader">
+          <Properties>
+            <Property name="mnemonic" type="int" value="82"/>
+            <Property name="text" type="java.lang.String" value="R"/>
+            <Property name="toolTipText" type="java.lang.String" value="Speed Reader"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSpeedReaderActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="buttonSelectAll">
+          <Properties>
+            <Property name="mnemonic" type="int" value="65"/>
+            <Property name="text" type="java.lang.String" value="A"/>
+            <Property name="toolTipText" type="java.lang.String" value="Select All"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSelectAllActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
