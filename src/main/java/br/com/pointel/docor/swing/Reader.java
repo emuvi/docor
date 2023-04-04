@@ -23,7 +23,9 @@ public class Reader extends javax.swing.JFrame {
         textMain.setEditable(false);
         textMain.setColumns(20);
         textMain.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        textMain.setLineWrap(true);
         textMain.setRows(5);
+        textMain.setWrapStyleWord(true);
         scrollMain.setViewportView(textMain);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

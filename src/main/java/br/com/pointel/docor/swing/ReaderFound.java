@@ -38,7 +38,9 @@ public class ReaderFound extends javax.swing.JFrame {
         textMain.setEditable(false);
         textMain.setColumns(20);
         textMain.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        textMain.setLineWrap(true);
         textMain.setRows(5);
+        textMain.setWrapStyleWord(true);
         textMain.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textMainKeyPressed(evt);
@@ -192,7 +194,7 @@ public class ReaderFound extends javax.swing.JFrame {
     }//GEN-LAST:event_textMainKeyPressed
     
     private void find() {
-        var selected = found.getStars().get(starIndex).meets().get(meetIndex).part().getText().trim();
+        var selected = found.getStars().get(starIndex).meets().get(meetIndex).part.getText().trim();
         var position = textMain.getText().indexOf(selected);
         if (position > -1) {
             textMain.setSelectionStart(position);

@@ -32,6 +32,10 @@ public class Paced {
     public String getFolder() {
         return folder;
     }
+    
+    public String getFolderDisplay() {
+        return folder.substring(folder.lastIndexOf(File.separator) + 1);
+    }
 
     public List<Paged> getPages() {
         return pages;
@@ -47,6 +51,7 @@ public class Paced {
     
     public Found search(List<Condition> conditions) {
         Found results = null;
+        var hits = 1;
         for (var paged: pages) {
             var founds = paged.search(conditions);
             if (!founds.isEmpty()) {
@@ -54,6 +59,7 @@ public class Paced {
                     results = new Found(this);
                 }
                 results.add(paged, founds);
+                hits++;
             }
         }
         return results;

@@ -15,7 +15,7 @@ public class Parted {
         this.text = text;
         this.words = indexWords();
     }
-    
+
     private String[] indexWords() {
         String[] parts = text.split("\\W+");
         for (int i = 0; i < parts.length; i++) {
@@ -35,25 +35,27 @@ public class Parted {
     public String getText() {
         return text;
     }
-    
+
     public Integer search(List<Condition> conditions) {
         var result = 0;
+        var hits = 0;
         for (var word : words) {
-            for (var condition: conditions) {
+            for (var condition : conditions) {
                 if (Utils.isMatch(word, condition.getWord())) {
                     result += condition.getWeight();
+                    hits++;
                 }
             }
         }
-        return result;
+        return result * hits;
     }
 
     public static enum Kind {
-        
+
         TITLE(9), SUBTITLE(6), DIVISION(3), PARAGRAPH(1);
-        
+
         private Integer weight;
-        
+
         private Kind(int weight) {
             this.weight = weight;
         }
@@ -61,9 +63,19 @@ public class Parted {
         public Integer getWeight() {
             return weight;
         }
-        
+
     };
-    
-    public static record Scored(Parted part, Integer scored) {};
+
+    public static class Scored {
+
+        public Parted part;
+        public Integer scored;
+
+        public Scored(Parted part, Integer scored) {
+            this.part = part;
+            this.scored = scored;
+        }
+
+    };
 
 }

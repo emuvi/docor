@@ -20,26 +20,31 @@ public class Utils {
         }
         var parent = origin.substring(0, origin.lastIndexOf(File.separator));
         var folder = new File(parent, "_docor_temp_" + RandomStringUtils.randomAlphabetic(8));
-        if (folder.exists()) {
+        try {
+            if (folder.exists()) {
+                FileUtils.deleteDirectory(folder);
+            }
+            Files.createDirectories(folder.toPath());
+            var args = new String[]{"soffice.exe", "--headless", "--convert-to", "pdf", "--outdir", folder.getAbsolutePath(), origin};
+            var proc = Runtime.getRuntime().exec(args);
+            var reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            if (proc.exitValue() != 0) {
+                throw new Exception("Error: could not convert the file.");
+            }
+            var name = path.getName().substring(0, path.getName().lastIndexOf('.'));
+            var done = name + ".pdf";
+            var converted = new File(folder, done);
+            Files.move(converted.toPath(), destiny.toPath());
+            return destiny;
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
             FileUtils.deleteDirectory(folder);
         }
-        Files.createDirectories(folder.toPath());
-        var args = new String[]{"soffice.exe", "--headless", "--convert-to", "pdf", "--outdir", folder.getAbsolutePath(), origin};
-        var proc = Runtime.getRuntime().exec(args);
-        var reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-        }
-        if (proc.exitValue() != 0) {
-            throw new Exception("Error: could not convert the file.");
-        }
-        var name = path.getName().substring(0, path.getName().lastIndexOf('.'));
-        var done = name + ".pdf";
-        var converted = new File(folder, done);
-        Files.move(converted.toPath(), destiny.toPath());
-        FileUtils.deleteDirectory(folder);
-        return destiny;
     }
 
     public static String normalize(String string) {
@@ -94,7 +99,7 @@ public class Utils {
         }
         return costs[s2.length()];
     }
-    
+
     public static Pair<String, String> getFolderAndName(File file) {
         var path = file.getAbsolutePath();
         var last = path.lastIndexOf(File.separator);

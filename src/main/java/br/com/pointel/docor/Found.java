@@ -30,14 +30,20 @@ public class Found {
     public void add(Paged page, List<Parted.Scored> meets) {
         var pageScored = 0;
         for (var meet : meets) {
-            pageScored += meet.scored();
+            pageScored += meet.scored;
         }
         this.score += pageScored;
         stars.add(new Star(new Paged.Scored(page, pageScored), meets));
     }
+    
+    public void multiplier(Integer hits) {
+        if (hits > 1) {
+            this.score *= hits;
+        }
+    }
 
     public Object[] toRow() {
-        return new Object[]{this, paced.getName(), paced.getFolder(), paced.getText().trim()};
+        return new Object[]{this, paced.getName(), paced.getFolderDisplay(), paced.getText().trim()};
     }
 
     @Override

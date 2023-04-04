@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -292,7 +290,7 @@ public class Interface extends javax.swing.JFrame {
                 }
 
                 private void loadFile(File file, DefaultMutableTreeNode parent) throws Exception {
-                    if (!file.getName().toLowerCase().endsWith(".md") 
+                    if (!file.getName().toLowerCase().endsWith(".md")
                             && !file.getName().toLowerCase().endsWith(".pdf")) {
                         file = Utils.convertToPDF(file);
                     }
@@ -371,11 +369,11 @@ public class Interface extends javax.swing.JFrame {
             JTable table = new JTable(rows);
             table.setDefaultEditor(Object.class, null);
             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            var total = tpnMain.getWidth() - 80;
-            table.getColumnModel().getColumn(0).setPreferredWidth(total * 8 / 100);
-            table.getColumnModel().getColumn(1).setPreferredWidth(total * 10 / 100);
-            table.getColumnModel().getColumn(2).setPreferredWidth(total * 36 / 100);
-            table.getColumnModel().getColumn(3).setPreferredWidth(total * 40 / 100);
+            var total = tpnMain.getWidth() - 120;
+            table.getColumnModel().getColumn(0).setPreferredWidth(90);
+            table.getColumnModel().getColumn(1).setPreferredWidth(total * 20 / 100);
+            table.getColumnModel().getColumn(2).setPreferredWidth(total * 30 / 100);
+            table.getColumnModel().getColumn(3).setPreferredWidth(total * 50 / 100);
             table.getColumnModel().getColumn(0).setCellRenderer(tableCell);
             table.getColumnModel().getColumn(1).setCellRenderer(tableCell);
             table.getColumnModel().getColumn(2).setCellRenderer(tableCell);
