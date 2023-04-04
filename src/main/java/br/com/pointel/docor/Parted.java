@@ -42,7 +42,6 @@ public class Parted {
             for (var condition: conditions) {
                 if (Utils.isMatch(word, condition.getWord())) {
                     result += condition.getWeight();
-                    System.out.println("Match: " + word + " and " + condition.getWord());
                 }
             }
         }
