@@ -4,14 +4,14 @@ import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
-public class SpeedReader extends javax.swing.JFrame {
+public class ReaderSpeed extends javax.swing.JFrame {
 
     private final String[] words;
     private volatile boolean running = false;
     private volatile int index = -1;
     private volatile int waitTime = 200;
     
-    public SpeedReader(String text) {
+    public ReaderSpeed(String text) {
         initComponents();
         this.words = text.split("\\s+");
         spinnerRate.setModel(new SpinnerNumberModel(450, 0, 1000, 10));
@@ -44,7 +44,7 @@ public class SpeedReader extends javax.swing.JFrame {
                         }
                     }
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(SpeedReader.this, ex.getMessage());
+                    JOptionPane.showMessageDialog(ReaderSpeed.this, ex.getMessage());
                 }
             }
         }.start();
@@ -62,7 +62,6 @@ public class SpeedReader extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Speed Reader");
-        setPreferredSize(new java.awt.Dimension(700, 500));
 
         buttonStart.setText("Start");
         buttonStart.addActionListener(new java.awt.event.ActionListener() {

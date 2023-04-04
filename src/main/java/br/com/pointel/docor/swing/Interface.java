@@ -379,7 +379,9 @@ public class Interface extends javax.swing.JFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if (e.getClickCount() >= 2 && table.getSelectedRow() > -1) {
-                        new Reader(from, (String) table.getValueAt(table.getSelectedRow(), 3)).setVisible(true);
+                        new ReaderFound(from,
+                                (Found) table.getValueAt(table.getSelectedRow(), 0),
+                                (String) table.getValueAt(table.getSelectedRow(), 3)).setVisible(true);
                     }
                 }
             });

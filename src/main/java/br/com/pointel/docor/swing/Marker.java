@@ -288,8 +288,7 @@ public class Marker extends javax.swing.JFrame {
                     .addComponent(buttonFolderSelect)
                     .addComponent(buttonFolderOpen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panUpperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkDefining)
+                .addGroup(panUpperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panUpperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(buttonTitle)
                         .addComponent(buttonSubtitle)
@@ -299,7 +298,8 @@ public class Marker extends javax.swing.JFrame {
                         .addComponent(buttonBold)
                         .addComponent(buttonListItem)
                         .addComponent(buttonNumberItem)
-                        .addComponent(btnTools))))
+                        .addComponent(btnTools))
+                    .addComponent(checkDefining)))
         );
 
         textMain.setColumns(20);
@@ -404,7 +404,7 @@ public class Marker extends javax.swing.JFrame {
     }//GEN-LAST:event_menuGroupImagesActionPerformed
 
     private void menuSpeedReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSpeedReaderActionPerformed
-        var speed = new SpeedReader(textMain.getText());
+        var speed = new ReaderSpeed(textMain.getText());
         speed.setLocationRelativeTo(this);
         speed.setVisible(true);
     }//GEN-LAST:event_menuSpeedReaderActionPerformed

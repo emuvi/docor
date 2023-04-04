@@ -1,7 +1,6 @@
 package br.com.pointel.docor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Found {
@@ -15,6 +14,18 @@ public class Found {
         this.score = 0;
         this.stars = new ArrayList<>();
     }
+
+    public Paced getPaced() {
+        return paced;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public List<Star> getStars() {
+        return stars;
+    }
     
     public void add(Paged page, List<Parted.Scored> meets) {
         var pageScored = 0;
@@ -26,7 +37,12 @@ public class Found {
     }
 
     public Object[] toRow() {
-        return new Object[]{score, paced.getName(), paced.getName(), paced.getText().trim()};
+        return new Object[]{this, paced.getName(), paced.getFolder(), paced.getText().trim()};
+    }
+
+    @Override
+    public String toString() {
+        return "" + score;
     }
     
     public static record Star(Paged.Scored pageScored, List<Parted.Scored> meets){};

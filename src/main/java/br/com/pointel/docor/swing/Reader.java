@@ -20,6 +20,7 @@ public class Reader extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Reader");
 
+        textMain.setEditable(false);
         textMain.setColumns(20);
         textMain.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         textMain.setRows(5);
