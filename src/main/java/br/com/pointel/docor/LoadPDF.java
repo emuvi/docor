@@ -33,7 +33,7 @@ public class LoadPDF {
             if (stripes.isEmpty()) {
                 return null;
             }
-            var paced = new Paced(file.getName());
+            var paced = new Paced(Utils.getFolderAndName(file));
             var paged = new Paged(paced);
             paced.addPage(paged);
             var pageNr = 1;

@@ -1,20 +1,36 @@
 package br.com.pointel.docor;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class Paced {
     
     private final String name;
+    private final String folder;
     private final List<Paged> pages;
     
-    public Paced(String name) {
-        this(name, new ArrayList<>());
+    public Paced(Pair<String, String> folderAndName) {
+        this(folderAndName.getRight(), folderAndName.getLeft(), new ArrayList<>());
+    }
+    
+    public Paced(String name, String folder) {
+        this(name, folder, new ArrayList<>());
     }
 
-    public Paced(String name, List<Paged> pages) {
+    public Paced(String name, String folder, List<Paged> pages) {
         this.name = name;
+        this.folder = folder;
         this.pages = pages;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFolder() {
+        return folder;
     }
 
     public List<Paged> getPages() {
@@ -48,7 +64,7 @@ public class Paced {
         for (var page : pages) {
             for (var part : page.getParts()) {
                 builder.append(part.getText());
-                builder.append("\n\n");
+                builder.append("\n");
             }
         }
         return builder.toString();

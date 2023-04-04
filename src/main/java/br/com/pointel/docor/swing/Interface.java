@@ -353,7 +353,7 @@ public class Interface extends javax.swing.JFrame {
             Collections.sort(allFounds, (o1, o2) -> {
                 return o2.score.compareTo(o1.score);
             });
-            var cols = new Object[]{"Paced", "Score", "Slices", "Text"};
+            var cols = new Object[]{"Score", "Name", "Folder", "Text"};
             var rows = new DefaultTableModel();
             rows.setColumnIdentifiers(cols);
             for (var found : allFounds) {
@@ -362,11 +362,11 @@ public class Interface extends javax.swing.JFrame {
             JTable table = new JTable(rows);
             table.setDefaultEditor(Object.class, null);
             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-            var total = tpnMain.getWidth() - 180;
-            table.getColumnModel().getColumn(0).setPreferredWidth(70);
-            table.getColumnModel().getColumn(1).setPreferredWidth(70);
-            table.getColumnModel().getColumn(2).setPreferredWidth(total * 40 / 100);
-            table.getColumnModel().getColumn(3).setPreferredWidth(total * 60 / 100);
+            var total = tpnMain.getWidth() - 80;
+            table.getColumnModel().getColumn(0).setPreferredWidth(total * 8 / 100);
+            table.getColumnModel().getColumn(1).setPreferredWidth(total * 10 / 100);
+            table.getColumnModel().getColumn(2).setPreferredWidth(total * 36 / 100);
+            table.getColumnModel().getColumn(3).setPreferredWidth(total * 40 / 100);
             table.getColumnModel().getColumn(0).setCellRenderer(tableCell);
             table.getColumnModel().getColumn(1).setCellRenderer(tableCell);
             table.getColumnModel().getColumn(2).setCellRenderer(tableCell);

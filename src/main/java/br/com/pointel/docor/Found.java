@@ -24,14 +24,9 @@ public class Found {
         this.score += pageScored;
         stars.add(new Star(new Paged.Scored(page, pageScored), meets));
     }
-    
-    public String getSlices() {
-        Collections.sort(stars, (e1, e2) -> e2.pageScored.scored().compareTo(e1.pageScored.scored()));
-        return "";
-    }
 
     public Object[] toRow() {
-        return new Object[]{paced, score, getSlices(), paced.getText()};
+        return new Object[]{score, paced.getName(), paced.getName(), paced.getText().trim()};
     }
     
     public static record Star(Paged.Scored pageScored, List<Parted.Scored> meets){};

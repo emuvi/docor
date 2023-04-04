@@ -17,7 +17,7 @@ public class Parted {
     }
     
     private String[] indexWords() {
-        String[] parts = text.split("\\s+");
+        String[] parts = text.split("\\W+");
         for (int i = 0; i < parts.length; i++) {
             parts[i] = Utils.normalize(parts[i]);
         }
@@ -40,8 +40,9 @@ public class Parted {
         var result = 0;
         for (var word : words) {
             for (var condition: conditions) {
-                if (Utils.isMatch(word, word)) {
+                if (Utils.isMatch(word, condition.getWord())) {
                     result += condition.getWeight();
+                    System.out.println("Match: " + word + " and " + condition.getWord());
                 }
             }
         }

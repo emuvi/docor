@@ -8,6 +8,7 @@ import java.text.Normalizer;
 import java.util.Objects;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class Utils {
 
@@ -45,6 +46,7 @@ public class Utils {
         string = string.toLowerCase();
         string = Normalizer.normalize(string, Normalizer.Form.NFD);
         string = string.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        string = string.replaceAll("\\W+", "");
         return string;
     }
 
@@ -62,7 +64,9 @@ public class Utils {
         if (longerLength == 0) {
             return 1.0;
         }
-        return (longerLength - editDistance(longer, shorter)) / (double) longerLength;
+        var result = (longerLength - editDistance(longer, shorter)) / (double) longerLength;
+//        System.out.println("Sim of \t" + s1 + " and \t" + s2 + " = " + result);
+        return result;
     }
 
     public static int editDistance(String s1, String s2) {
@@ -89,6 +93,12 @@ public class Utils {
             }
         }
         return costs[s2.length()];
+    }
+    
+    public static Pair<String, String> getFolderAndName(File file) {
+        var path = file.getAbsolutePath();
+        var last = path.lastIndexOf(File.separator);
+        return Pair.of(path.substring(0, last), path.substring(last + 1));
     }
 
 }
