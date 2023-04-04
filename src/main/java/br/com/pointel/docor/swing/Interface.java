@@ -2,7 +2,9 @@ package br.com.pointel.docor.swing;
 
 import br.com.pointel.docor.Conditions;
 import br.com.pointel.docor.Found;
+import br.com.pointel.docor.LoadMD;
 import br.com.pointel.docor.LoadPDF;
+import br.com.pointel.docor.Loader;
 import br.com.pointel.docor.Paced;
 import br.com.pointel.docor.Utils;
 import com.formdev.flatlaf.FlatDarculaLaf;
@@ -290,13 +292,20 @@ public class Interface extends javax.swing.JFrame {
                 }
 
                 private void loadFile(File file, DefaultMutableTreeNode parent) throws Exception {
-                    if (!file.getName().toLowerCase().endsWith(".pdf")) {
+                    if (!file.getName().toLowerCase().endsWith(".md") 
+                            && !file.getName().toLowerCase().endsWith(".pdf")) {
                         file = Utils.convertToPDF(file);
                     }
                     if (file == null) {
                         return;
                     }
-                    var paced = new LoadPDF(file).load();
+                    Loader loader;
+                    if (file.getName().toLowerCase().endsWith(".md")) {
+                        loader = new LoadMD(file);
+                    } else {
+                        loader = new LoadPDF(file);
+                    }
+                    var paced = loader.load();
                     if (paced == null) {
                         return;
                     }

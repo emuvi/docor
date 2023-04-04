@@ -3,21 +3,21 @@ package br.com.pointel.docor;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.TextPosition;
 
-public class LoadPDF {
+public class LoadPDF implements Loader {
 
-    private File file;
+    private final File file;
 
     public LoadPDF(File file) {
         this.file = file;
     }
 
+    @Override
     public Paced load() throws Exception {
         try (var doc = PDDocument.load(file)) {
             var stripper = new Stripper();
