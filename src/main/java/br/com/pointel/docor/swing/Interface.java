@@ -3,7 +3,7 @@ package br.com.pointel.docor.swing;
 import br.com.pointel.docor.Conditions;
 import br.com.pointel.docor.Found;
 import br.com.pointel.docor.LoadMD;
-import br.com.pointel.docor.LoadPDF;
+import br.com.pointel.docor.LoadPDFSimple;
 import br.com.pointel.docor.Loader;
 import br.com.pointel.docor.Paced;
 import br.com.pointel.docor.Utils;
@@ -305,7 +305,7 @@ public class Interface extends javax.swing.JFrame {
                     if (file.getName().toLowerCase().endsWith(".md")) {
                         loader = new LoadMD(file);
                     } else {
-                        loader = new LoadPDF(file);
+                        loader = new LoadPDFSimple(file);
                     }
                     var paced = loader.load();
                     if (paced == null) {

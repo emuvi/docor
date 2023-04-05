@@ -9,11 +9,11 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.TextPosition;
 
-public class LoadPDF implements Loader {
+public class LoadPDFDetails implements Loader {
 
     private final File file;
 
-    public LoadPDF(File file) {
+    public LoadPDFDetails(File file) {
         this.file = file;
     }
 
@@ -21,7 +21,8 @@ public class LoadPDF implements Loader {
     public Paced load() throws Exception {
         try (var doc = PDDocument.load(file)) {
             var stripper = new Stripper();
-            stripper.getText(doc);
+            var text = stripper.getText(doc);
+            System.out.println(text);
             var stripes = stripper.stripes;
             Collections.sort(stripes, (e1, e2) -> {
                 var dif = Integer.compare(e1.page, e2.page);
@@ -58,6 +59,7 @@ public class LoadPDF implements Loader {
 
         @Override
         protected void writeString(String line, List<TextPosition> positions) throws IOException {
+            super.writeString(line, positions);
             if (positions.isEmpty()) {
                 return;
             }
