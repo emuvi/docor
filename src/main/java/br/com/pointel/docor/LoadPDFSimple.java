@@ -1,13 +1,8 @@
 package br.com.pointel.docor;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.pdfbox.text.TextPosition;
 
 public class LoadPDFSimple implements Loader {
 
@@ -30,7 +25,7 @@ public class LoadPDFSimple implements Loader {
                 var text = stripper.getText(doc);
                 var lines = text.split("\n");
                 for (var line : lines) {
-                    line = line.trim();
+                    line = line.replaceAll("\\s+", " ").trim();
                     if (!line.isEmpty()) {
                         paged.addPart(new Parted(paged, Parted.Kind.PARAGRAPH, line));
                     }

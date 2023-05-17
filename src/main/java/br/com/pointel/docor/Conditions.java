@@ -11,11 +11,10 @@ public class Conditions {
         for (var word : wordsArray) {
             Integer weight = 1;
             while (word.startsWith("!")) {
-                word = word.substring(3);
+                word = word.substring(1);
                 weight++;
             }
             results.add(new Condition(weight, Utils.normalize(word)));
-            
         }
         return results;
     }
